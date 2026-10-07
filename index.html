@@ -663,11 +663,11 @@ footer a:hover{text-decoration:underline}
      PHONE: WhatsApp comercial (55 + DDD + número).
      SHEET_ENDPOINT: URL do Google Apps Script para registrar leads (opcional). */
   var PHONE = "554732521200";
-  var SHEET_ENDPOINT = "";
+  var SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbzmHUbOL1HP61VNcFTqDUbyy01cf2igEsmLCZNkakoi0jUq3Fn-yYPyUc8IpfsQ7R6aRA/exec"; var ORIGEM = (function(){ var o = {}, q = new URLSearchParams(location.search), ks = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","fbclid"]; try { o = JSON.parse(sessionStorage.getItem("rg_origem") || "{}"); } catch(e){} ks.forEach(function(k){ if (q.get(k)) o[k] = q.get(k); }); try { sessionStorage.setItem("rg_origem", JSON.stringify(o)); } catch(e){} o.pagina = location.href.split("?")[0]; return o; })();
   function wa(msg){ return "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg); }
 
   function registrarLead(dados){
-    if (!SHEET_ENDPOINT) return;
+    if (!SHEET_ENDPOINT) return; for (var k in ORIGEM) { if (!dados[k]) dados[k] = ORIGEM[k]; }
     try {
       var corpo = new Blob([JSON.stringify(dados)], {type:"text/plain;charset=UTF-8"});
       if (navigator.sendBeacon) navigator.sendBeacon(SHEET_ENDPOINT, corpo);
